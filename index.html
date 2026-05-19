@@ -102,7 +102,7 @@ button:hover{
 }
 
 .preview{
-    background:#111;
+    background:#0f0f0f;
     border-radius:30px;
     padding:50px;
     position:relative;
@@ -405,11 +405,11 @@ function baixarPDF(){
     const element = document.getElementById('receipt');
 
     const opt = {
-        margin:0,
+        margin:20,
         filename:'comprovante-axis1.pdf',
         image:{ type:'jpeg', quality:1 },
         html2canvas:{ scale:3 },
-        jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' }
+        jsPDF:{ unit:'px', format:[1400,1800], orientation:'portrait' }
     };
 
     html2pdf().set(opt).from(element).save();
