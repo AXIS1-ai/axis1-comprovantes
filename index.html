@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>AXIS 1 • Comprovante</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0c0c0c;
+    font-family:'Inter',sans-serif;
+    color:white;
+    min-height:100vh;
+    padding:40px 20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:400px 1fr;
+    gap:30px;
+}
+
+.panel{
+    background:#141414;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 0 40px rgba(0,0,0,.4);
+}
+
+.title{
+    font-family:'Montserrat',sans-serif;
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#999;
+    margin-bottom:30px;
+    line-height:1.5;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14px;
+    color:#ccc;
+}
+
+input, select, textarea{
+    width:100%;
+    background:#1d1d1d;
+    border:1px solid #2a2a2a;
+    border-radius:14px;
+    padding:15px;
+    color:white;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#ff6a00;
+}
+
+button{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(135deg,#ff6a00,#ff8c00);
+    color:white;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:10px;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    opacity:.95;
+}
+
+.preview{
+    background:#111;
+    border-radius:30px;
+    padding:50px;
+    position:relative;
+    overflow:hidden;
+}
+
+.glow{
+    position:absolute;
+    width:400px;
+    height:400px;
+    background:#ff6a00;
+    filter:blur(180px);
+    opacity:.15;
+    top:-150px;
+    right:-100px;
+}
+
+.receipt{
+    position:relative;
+    z-index:2;
+}
+
+.logo{
+    width:170px;
+    margin-bottom:40px;
+}
+
+.badge{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:rgba(255,106,0,.12);
+    border:1px solid rgba(255,106,0,.3);
+    color:#ff9a4d;
+    font-size:13px;
+    margin-bottom:30px;
+}
+
+.receipt-title{
+    font-family:'Montserrat',sans-serif;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.receipt-sub{
+    color:#999;
+    margin-bottom:40px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+    margin-bottom:40px;
+}
+
+.info{
+    background:#181818;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:18px;
+    padding:20px;
+}
+
+.info span{
+    display:block;
+    color:#888;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.info strong{
+    font-size:18px;
+    font-weight:600;
+}
+
+.value{
+    margin-top:20px;
+    background:linear-gradient(135deg,#ff6a00,#ff8c00);
+    padding:30px;
+    border-radius:24px;
+}
+
+.value span{
+    display:block;
+    font-size:14px;
+    margin-bottom:10px;
+    opacity:.8;
+}
+
+.value strong{
+    font-size:42px;
+    font-family:'Montserrat',sans-serif;
+}
+
+.footer{
+    margin-top:40px;
+    color:#777;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.download{
+    margin-top:30px;
+}
+
+@media(max-width:980px){
+
+.container{
+    grid-template-columns:1fr;
+}
+
+.preview{
+    padding:30px;
+}
+
+.receipt-title{
+    font-size:30px;
+}
+
+.value strong{
+    font-size:32px;
+}
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="panel">
+
+<h1 class="title">Comprovante AXIS 1</h1>
+
+<p class="subtitle">
+Preencha os dados abaixo para gerar o comprovante automaticamente.
+</p>
+
+<div class="input-group">
+<label>Nome do Cliente</label>
+<input type="text" id="cliente" placeholder="Digite o nome">
+</div>
+
+<div class="input-group">
+<label>Valor</label>
+<input type="text" id="valor" placeholder="R$ 497,00">
+</div>
+
+<div class="input-group">
+<label>Referente</label>
+<input type="text" id="referente" placeholder="Plano Estratégico">
+</div>
+
+<div class="input-group">
+<label>Forma de Pagamento</label>
+<select id="pagamento">
+<option>PIX</option>
+<option>Cartão de Crédito</option>
+<option>Boleto</option>
+<option>Transferência</option>
+<option>Dinheiro</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>Observação</label>
+<textarea id="obs" rows="4" placeholder="Opcional"></textarea>
+</div>
+
+<button onclick="gerarComprovante()">
+GERAR COMPROVANTE
+</button>
+
+<button class="download" onclick="baixarPDF()">
+BAIXAR PDF
+</button>
+
+</div>
+
+<div class="preview">
+
+<div class="glow"></div>
+
+<div class="receipt" id="receipt">
+
+<div class="badge">
+PAGAMENTO CONFIRMADO
+</div>
+
+<h2 class="receipt-title">
+Comprovante de Pagamento
+</h2>
+
+<p class="receipt-sub">
+Documento gerado automaticamente pelo sistema AXIS 1.
+</p>
+
+<div class="grid">
+
+<div class="info">
+<span>CLIENTE</span>
+<strong id="viewCliente">Nome do Cliente</strong>
+</div>
+
+<div class="info">
+<span>FORMA DE PAGAMENTO</span>
+<strong id="viewPagamento">PIX</strong>
+</div>
+
+<div class="info">
+<span>REFERENTE</span>
+<strong id="viewReferente">Plano</strong>
+</div>
+
+<div class="info">
+<span>DATA</span>
+<strong id="viewData"></strong>
+</div>
+
+<div class="info">
+<span>ID DO COMPROVANTE</span>
+<strong id="viewId"></strong>
+</div>
+
+<div class="info">
+<span>OBSERVAÇÃO</span>
+<strong id="viewObs">-</strong>
+</div>
+
+</div>
+
+<div class="value">
+<span>VALOR PAGO</span>
+<strong id="viewValor">R$ 0,00</strong>
+</div>
+
+<div class="footer">
+AXIS 1 • Marketing Estratégico<br>
+Documento gerado automaticamente.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function gerarID(){
+    return 'AX' + Math.floor(Math.random() * 999999);
+}
+
+function dataAtual(){
+    const data = new Date();
+
+    return data.toLocaleDateString('pt-BR',{
+        day:'2-digit',
+        month:'long',
+        year:'numeric'
+    });
+}
+
+document.getElementById('viewData').innerText = dataAtual();
+document.getElementById('viewId').innerText = gerarID();
+
+function gerarComprovante(){
+
+    document.getElementById('viewCliente').innerText =
+    document.getElementById('cliente').value || 'Nome do Cliente';
+
+    document.getElementById('viewValor').innerText =
+    document.getElementById('valor').value || 'R$ 0,00';
+
+    document.getElementById('viewReferente').innerText =
+    document.getElementById('referente').value || 'Plano';
+
+    document.getElementById('viewPagamento').innerText =
+    document.getElementById('pagamento').value;
+
+    document.getElementById('viewObs').innerText =
+    document.getElementById('obs').value || '-';
+
+    document.getElementById('viewData').innerText =
+    dataAtual();
+
+    document.getElementById('viewId').innerText =
+    gerarID();
+
+}
+
+function baixarPDF(){
+
+    const element = document.getElementById('receipt');
+
+    const opt = {
+        margin:0,
+        filename:'comprovante-axis1.pdf',
+        image:{ type:'jpeg', quality:1 },
+        html2canvas:{ scale:3 },
+        jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save();
+
+}
+
+</script>
+
+</body>
+</html>
