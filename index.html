@@ -1,237 +1,239 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AXIS 1 • Comprovante</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-    background:#0c0c0c;
-    font-family:'Inter',sans-serif;
-    color:white;
-    min-height:100vh;
-    padding:40px 20px;
+background:#050505;
+font-family:'Inter',sans-serif;
+color:#fff;
+padding:40px 20px;
 }
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:400px 1fr;
-    gap:30px;
+max-width:1400px;
+margin:auto;
+display:grid;
+grid-template-columns:380px 1fr;
+gap:30px;
 }
 
 .panel{
-    background:#141414;
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:24px;
-    padding:30px;
-    box-shadow:0 0 40px rgba(0,0,0,.4);
+background:#111;
+border-radius:28px;
+padding:30px;
+height:fit-content;
 }
 
 .title{
-    font-family:'Montserrat',sans-serif;
-    font-size:28px;
-    margin-bottom:10px;
+font-family:'Montserrat',sans-serif;
+font-size:30px;
+margin-bottom:10px;
 }
 
 .subtitle{
-    color:#999;
-    margin-bottom:30px;
-    line-height:1.5;
+color:#888;
+margin-bottom:30px;
+line-height:1.6;
 }
 
-.input-group{
-    margin-bottom:20px;
-}
+.input-group{margin-bottom:20px;}
 
 label{
-    display:block;
-    margin-bottom:8px;
-    font-size:14px;
-    color:#ccc;
+display:block;
+margin-bottom:10px;
+color:#ccc;
+font-size:14px;
 }
 
-input, select, textarea{
-    width:100%;
-    background:#1d1d1d;
-    border:1px solid #2a2a2a;
-    border-radius:14px;
-    padding:15px;
-    color:white;
-    font-size:15px;
-    outline:none;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:#ff6a00;
+input,select,textarea{
+width:100%;
+background:#1a1a1a;
+border:1px solid #2a2a2a;
+border-radius:16px;
+padding:16px;
+color:white;
+font-size:15px;
 }
 
 button{
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:16px;
-    background:linear-gradient(135deg,#ff6a00,#ff8c00);
-    color:white;
-    font-weight:700;
-    font-size:15px;
-    cursor:pointer;
-    transition:.3s;
-    margin-top:10px;
+width:100%;
+border:none;
+border-radius:18px;
+padding:18px;
+margin-top:12px;
+cursor:pointer;
+font-size:15px;
+font-weight:700;
 }
 
-button:hover{
-    transform:translateY(-2px);
-    opacity:.95;
+.primary-btn{
+background:linear-gradient(135deg,#ff6a00,#ff8c00);
+color:white;
+}
+
+.secondary-btn{
+background:#1a1a1a;
+color:white;
+border:1px solid #333;
 }
 
 .preview{
-    background:#0f0f0f;
-    border-radius:30px;
-    padding:50px;
-    position:relative;
-    overflow:hidden;
-}
-
-.glow{
-    position:absolute;
-    width:400px;
-    height:400px;
-    background:#ff6a00;
-    filter:blur(180px);
-    opacity:.15;
-    top:-150px;
-    right:-100px;
+background:#050505;
+border-radius:32px;
+overflow:hidden;
 }
 
 .receipt{
-    position:relative;
-    z-index:2;
-}
-
-.logo{
-    width:170px;
-    margin-bottom:40px;
+padding:60px;
+background:radial-gradient(circle at top right, rgba(255,106,0,.12), transparent 30%), #050505;
 }
 
 .badge{
-    display:inline-block;
-    padding:10px 18px;
-    border-radius:999px;
-    background:rgba(255,106,0,.12);
-    border:1px solid rgba(255,106,0,.3);
-    color:#ff9a4d;
-    font-size:13px;
-    margin-bottom:30px;
+display:inline-block;
+padding:14px 24px;
+border-radius:999px;
+border:1px solid rgba(255,106,0,.4);
+background:rgba(255,106,0,.08);
+color:#ff8c3b;
+font-size:14px;
+font-weight:600;
+margin-bottom:40px;
 }
 
 .receipt-title{
-    font-family:'Montserrat',sans-serif;
-    font-size:42px;
-    margin-bottom:10px;
+font-family:'Montserrat',sans-serif;
+font-size:52px;
+margin-bottom:12px;
 }
 
 .receipt-sub{
-    color:#999;
-    margin-bottom:40px;
+color:#888;
+margin-bottom:50px;
+font-size:17px;
 }
 
 .grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-    margin-bottom:40px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
 }
 
 .info{
-    background:#181818;
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:18px;
-    padding:20px;
+background:#0f0f0f;
+border-radius:24px;
+padding:28px;
 }
 
 .info span{
-    display:block;
-    color:#888;
-    font-size:13px;
-    margin-bottom:10px;
+display:block;
+color:#777;
+font-size:13px;
+margin-bottom:14px;
 }
 
 .info strong{
-    font-size:18px;
-    font-weight:600;
+font-size:20px;
+line-height:1.5;
 }
 
 .value{
-    margin-top:20px;
-    background:linear-gradient(135deg,#ff6a00,#ff8c00);
-    padding:30px;
-    border-radius:24px;
+margin-top:35px;
+padding:40px;
+border-radius:30px;
+background:linear-gradient(135deg,#ff6a00,#ff8c00);
 }
 
 .value span{
-    display:block;
-    font-size:14px;
-    margin-bottom:10px;
-    opacity:.8;
+display:block;
+margin-bottom:12px;
+font-size:14px;
 }
 
 .value strong{
-    font-size:42px;
-    font-family:'Montserrat',sans-serif;
+font-size:58px;
+font-family:'Montserrat',sans-serif;
 }
 
 .footer{
-    margin-top:40px;
-    color:#777;
-    font-size:13px;
-    line-height:1.7;
+margin-top:70px;
+padding-top:30px;
+border-top:1px solid rgba(255,106,0,.35);
+text-align:center;
 }
 
-.download{
-    margin-top:30px;
+.logo{
+font-family:'Montserrat',sans-serif;
+font-size:54px;
+font-weight:800;
+}
+
+.logo span{color:#ff6a00;}
+
+.footer p{
+color:#888;
+margin-top:18px;
+font-size:16px;
+}
+
+.footer small{
+color:#ff6a00;
+display:block;
+margin-top:14px;
+font-size:15px;
+}
+
+.bottom-bar{
+padding:25px 40px;
+display:flex;
+justify-content:space-between;
+color:#777;
+font-size:14px;
 }
 
 @media(max-width:980px){
+.container{grid-template-columns:1fr;}
+.grid{grid-template-columns:1fr;}
+.receipt{padding:35px;}
+.receipt-title{font-size:34px;}
+.value strong{font-size:40px;}
+}
+
+@media print{
+body{
+background:#050505 !important;
+padding:0 !important;
+-webkit-print-color-adjust: exact !important;
+print-color-adjust: exact !important;
+}
+
+.panel{display:none !important;}
 
 .container{
-    grid-template-columns:1fr;
+display:block !important;
+max-width:100% !important;
 }
 
 .preview{
-    padding:30px;
+border-radius:0 !important;
 }
 
-.receipt-title{
-    font-size:30px;
+.receipt{
+padding:40px !important;
 }
 
-.value strong{
-    font-size:32px;
+@page{
+size:A4;
+margin:0;
 }
-
-.grid{
-    grid-template-columns:1fr;
 }
-
-}
-
 </style>
 </head>
 
@@ -249,17 +251,17 @@ Preencha os dados abaixo para gerar o comprovante automaticamente.
 
 <div class="input-group">
 <label>Nome do Cliente</label>
-<input type="text" id="cliente" placeholder="Digite o nome">
+<input type="text" id="cliente">
 </div>
 
 <div class="input-group">
 <label>Valor</label>
-<input type="text" id="valor" placeholder="R$ 497,00">
+<input type="text" id="valor">
 </div>
 
 <div class="input-group">
 <label>Referente</label>
-<input type="text" id="referente" placeholder="Plano Estratégico">
+<input type="text" id="referente">
 </div>
 
 <div class="input-group">
@@ -275,32 +277,22 @@ Preencha os dados abaixo para gerar o comprovante automaticamente.
 
 <div class="input-group">
 <label>Observação</label>
-<textarea id="obs" rows="4" placeholder="Opcional"></textarea>
+<textarea id="obs" rows="4"></textarea>
 </div>
 
-<button onclick="gerarComprovante()">
-GERAR COMPROVANTE
-</button>
+<button class="primary-btn" onclick="gerarComprovante()">GERAR COMPROVANTE</button>
 
-<button class="download" onclick="baixarPDF()">
-BAIXAR PDF
-</button>
+<button class="secondary-btn" onclick="baixarPDF()">BAIXAR PDF</button>
 
 </div>
 
 <div class="preview">
 
-<div class="glow"></div>
+<div class="receipt">
 
-<div class="receipt" id="receipt">
+<div class="badge">PAGAMENTO CONFIRMADO</div>
 
-<div class="badge">
-PAGAMENTO CONFIRMADO
-</div>
-
-<h2 class="receipt-title">
-Comprovante de Pagamento
-</h2>
+<h2 class="receipt-title">Comprovante de Pagamento</h2>
 
 <p class="receipt-sub">
 Documento gerado automaticamente pelo sistema AXIS 1.
@@ -320,7 +312,7 @@ Documento gerado automaticamente pelo sistema AXIS 1.
 
 <div class="info">
 <span>REFERENTE</span>
-<strong id="viewReferente">Plano</strong>
+<strong id="viewReferente">Plano Estratégico</strong>
 </div>
 
 <div class="info">
@@ -346,10 +338,22 @@ Documento gerado automaticamente pelo sistema AXIS 1.
 </div>
 
 <div class="footer">
-AXIS 1 • Marketing Estratégico<br>
-Documento gerado automaticamente.
+
+<div class="logo">
+AXIS<span>1</span>
 </div>
 
+<p>Solução inteligente para gestão e automação.</p>
+
+<small>www.axis1.com.br</small>
+
+</div>
+
+</div>
+
+<div class="bottom-bar">
+<div>© 2026 AXIS 1. Todos os direitos reservados.</div>
+<div>Versão 1.0.0</div>
 </div>
 
 </div>
@@ -357,94 +361,48 @@ Documento gerado automaticamente.
 </div>
 
 <script>
-
 function gerarID(){
-    return 'AX' + Math.floor(Math.random() * 999999);
+return 'AX' + Math.floor(Math.random() * 999999);
 }
 
 function dataAtual(){
-    const data = new Date();
+const data = new Date();
+return data.toLocaleDateString('pt-BR', {
+day:'2-digit',
+month:'long',
+year:'numeric'
+});
+}
 
-    return data.toLocaleDateString('pt-BR',{
-        day:'2-digit',
-        month:'long',
-        year:'numeric'
-    });
+function gerarComprovante(){
+document.getElementById('viewCliente').innerText =
+document.getElementById('cliente').value || 'Nome do Cliente';
+
+document.getElementById('viewValor').innerText =
+document.getElementById('valor').value || 'R$ 0,00';
+
+document.getElementById('viewReferente').innerText =
+document.getElementById('referente').value || 'Plano Estratégico';
+
+document.getElementById('viewPagamento').innerText =
+document.getElementById('pagamento').value;
+
+document.getElementById('viewObs').innerText =
+document.getElementById('obs').value || '-';
+
+document.getElementById('viewData').innerText =
+dataAtual();
+
+document.getElementById('viewId').innerText =
+gerarID();
+}
+
+function baixarPDF(){
+window.print();
 }
 
 document.getElementById('viewData').innerText = dataAtual();
 document.getElementById('viewId').innerText = gerarID();
-
-function gerarComprovante(){
-
-    document.getElementById('viewCliente').innerText =
-    document.getElementById('cliente').value || 'Nome do Cliente';
-
-    document.getElementById('viewValor').innerText =
-    document.getElementById('valor').value || 'R$ 0,00';
-
-    document.getElementById('viewReferente').innerText =
-    document.getElementById('referente').value || 'Plano';
-
-    document.getElementById('viewPagamento').innerText =
-    document.getElementById('pagamento').value;
-
-    document.getElementById('viewObs').innerText =
-    document.getElementById('obs').value || '-';
-
-    document.getElementById('viewData').innerText =
-    dataAtual();
-
-    document.getElementById('viewId').innerText =
-    gerarID();
-
-}
-
-function baixarPDF(){
-    window.print();
-}{
-
-    const element = document.getElementById('receipt');
-
-    const opt = {
-        margin:20,
-        filename:'comprovante-axis1.pdf',
-        image:{ type:'jpeg', quality:1 },
-        html2canvas:{ scale:3 },
-        jsPDF:{ unit:'px', format:[1400,1800], orientation:'portrait' }
-    };
-
-    html2pdf().set(opt).from(element).save();
-
-}
-
-    @media print {
-
-body{
-    background:#0f0f0f !important;
-    padding:0;
-}
-
-.panel{
-    display:none;
-}
-
-.container{
-    display:block;
-}
-
-.preview{
-    width:100%;
-    border-radius:0;
-    box-shadow:none;
-    background:#0f0f0f !important;
-}
-
-.receipt{
-    zoom:0.9;
-}
-
-}
 </script>
 
 </body>
